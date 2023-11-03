@@ -1,7 +1,7 @@
 use std::io;
 
 fn main() {
-    // Prompt the user to enter the distance in miles and time in hours
+    // enter the distance in miles and time in hours
     println!("Enter the distance in miles: ");
     let mut distance = String::new();
     io::stdin().read_line(&mut distance).expect("Failed to read line");
@@ -15,6 +15,5 @@ fn main() {
     // Calculate the speed in kilometers per hour
     let speed_kph = (distance * 1.60934) / time;
 
-    // Print the result
     println!("The car is traveling at {:.2} kilometers per hour.", speed_kph);
 }
