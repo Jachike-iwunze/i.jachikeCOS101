@@ -1,28 +1,20 @@
+use std::io;
+
 fn main() {
-    
-        let  miles = 80.0;
-        let  hours = 2.0;
-    
-        //  1 mile = 1.60934 kilometers
-        let kilometers = miles * 1.60934;
-    
-        // Speed in kilometers per hour = Distance (in kilometers) / Time (in hours)
-        let speed_kilos = kilometers / hours;
-    
-        println!("The car is traveling at {} kilometers per hour.", speed_kilos);
+    // Prompt the user to enter the distance in miles and time in hours
+    println!("Enter the distance in miles: ");
+    let mut distance = String::new();
+    io::stdin().read_line(&mut distance).expect("Failed to read line");
+    let distance: f64 = distance.trim().parse().expect("Invalid input. Please enter a number.");
 
+    println!("Enter the time in hours: ");
+    let mut time = String::new();
+    io::stdin().read_line(&mut time).expect("Failed to read line");
+    let time: f64 = time.trim().parse().expect("Invalid input. Please enter a number.");
 
-        //if it goes 120 miles in 4 hours 
-        let miles = 120.0;
-        let hours = 4.0;
-    
-        //  1 mile = 1.60934 kilometers
-        let kilometers = miles * 1.60934;
-    
-        // Speed in kilometers per hour = Distance (in kilometers) / Time (in hours)
-        let speed = kilometers / hours;
-    
-        println!("The car is traveling at {} kilometers per hour.", speed);
-    
-    
+    // Calculate the speed in kilometers per hour
+    let speed_kph = (distance * 1.60934) / time;
+
+    // Print the result
+    println!("The car is traveling at {:.2} kilometers per hour.", speed_kph);
 }
