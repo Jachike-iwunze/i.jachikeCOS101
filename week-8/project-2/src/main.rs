@@ -1,109 +1,69 @@
 use std::io;
 
-fn num_of_siblings() -> i32 {
-    let mut input = String::new();
-    println!("How many siblings do you have");
-    io::stdin().read_line(&mut input).expect("Failed to read input");
-    let n: i32 = input.trim().parse().expect("Failed to read input");
-    n
-}
-
 fn main() {
-    let mut myarr:Vec<String> = Vec::new();
-    let n = num_of_siblings();
+    let mut people_info: Vec<(String, u32, String, String, i32)> = Vec::new();
 
-    for i in 0..n {
-        let mut name = String::new();
-        println!("Name of sibling ({}):", i + 1);  // Fixed the indexing issue and added a missing semicolon
-        io::stdin().read_line(&mut name).expect("Failed to read input");
-        let name = name.trim();
-        myarr.push(name.to_string());
+    let mut highest_experience: Option<usize> = None;
 
-        let mut age = String::new();
-        println!("Age of sibling ({}):", i + 1);
-        io::stdin().read_line(&mut age).expect("Failed to read input");
-        let age:i32 = age.trim().parse().expect("Failed to read input");
-        myarr.push(age.to_string());
+    println!("Hello , how many people are we interviewing today?");
+    let mut input1 = String::new();
+    io::stdin().read_line(&mut input1).expect("Failed to read input");
+    let input1:i32 = input1.trim().parse().expect("Invalid input");
 
-        if age > 18 {
-            let mut status = String::new();
-            println!("married or single: ");
-            io::stdin().read_line(&mut status).expect("Failed to read input");
-            let status = status.trim().to_lowercase();
-            myarr.push(status.to_string());
+    for number in 1..=input1{
 
-            if status == "single"{
-                let mut occupation = String::new();
-                println!("student or worker: ");
-                io::stdin().read_line(&mut occupation).expect("Failed to read input");
-                let occupation = occupation.trim().to_lowercase();
-                myarr.push(occupation.to_string());
+    println!("Send person number {} in", number);
 
-                if occupation == "student"{
-                    let mut university_name = String::new();
-                    println!("Name of university: ");
-                    io::stdin().read_line(&mut university_name).expect("Failed to read input");
-                    let university_name = university_name.trim();
-                    myarr.push(university_name.to_string());
+    // Ask for name
+    println!("\nWelcome, Please input your name");
+    let mut name = String::new();
+    io::stdin().read_line(&mut name).expect("Failed to read input");
+    let name = name.trim().to_string();
 
-                    let mut course_of_study = String::new();
-                    println!("Course of study: ");
-                    io::stdin().read_line(&mut course_of_study).expect("Failed to read input");
-                    let course_of_study = course_of_study.trim();
-                    myarr.push(course_of_study.to_string());
-                }
+    // Ask for age
+    println!("Hello {}, please input age", name);
+    let mut age = String::new();
+    io::stdin().read_line(&mut age).expect("Failed to read input");
+    let age:u32 = age.trim().parse().expect("Invalid Input");
 
-            }
-            else if status == "married"{
+    // Ask for gender
+    println!("Please input Gender");
+    let mut gender = String::new();
+    io::stdin().read_line(&mut gender).expect("Failed to read input");
+    let gender = gender.trim().to_string();
 
-                let mut offspring_status = String::new();
-                println!("Any offring? (yes/no)");
-                io::stdin().read_line(&mut offspring_status).expect("Failed to read input");
-                let offspring_status = offspring_status.trim();
-                myarr.push(offspring_status.to_string());
+    // Ask for degree class
+    println!("Please input your degree class");
+    let mut degree_class = String::new();
+    io::stdin().read_line(&mut degree_class).expect("Failed to read input");
+    let degree_class = degree_class.trim().to_string();
 
-                let mut family_city = String::new();
-                println!("Family city of residence: ");
-                io::stdin().read_line(&mut family_city).expect("Failed to read input");
-                let family_city = family_city.trim();
-                myarr.push(family_city.to_string());
+    // Ask for experience years
+    println!("Please input programming experience years");
+    let mut experience = String::new();
+    io::stdin().read_line(&mut experience).expect("Failed to read input");
+    let experience:i32 = experience.trim().parse().expect("Invalid Input");
+
+    println!("Thanks");
+
+    let person_info = (name,age,gender,degree_class,experience);
+    people_info.push(person_info);
+
+    if let Some(index) = highest_experience {
+        if experience > people_info[index].4 {
+            highest_experience = Some(people_info.len() - 1);
             }
         }
-        else if age <= 18{
-            let mut waec_status = String::new();
-            println!("Written WAEC? (yes/no)");
-            io::stdin().read_line(&mut waec_status).expect("Failed to read input");
-            let waec_status = waec_status.trim().to_lowercase();
-            myarr.push(waec_status.to_string());
-
-            if waec_status == "yes"{
-            let mut schl_name = String::new();
-            println!("Name of Secondary School: ");
-            io::stdin().read_line(&mut schl_name).expect("Failed to read input");
-            let schl_name = schl_name.trim();
-            myarr.push(schl_name.to_string());
+        else{
+            highest_experience =  Some(people_info.len() - 1);
         }
-            else if waec_status == "no"{
-                let mut class_level = String::new();
-                
-                println!("What is your current class level");
-                io::stdin().read_line(&mut class_level).expect("Failed to read input");
-                let class_level = class_level.trim();
-                myarr.push(class_level.to_string());
-            }
+    
 
-
-        }
-
-
-
-        for val in myarr.iter() {
-         println!("{:?}",val );
-
-        }
-
-
-
-        
     }
+
+
+    if let Some(index) = highest_experience {
+        let highest_experience = &people_info[index];
+        print!("\nPerson With Highest Experience: \nName: {} \nAge: {} \nGender: {} \nDegree Class: {} \nExperience Years: {}", highest_experience.0,highest_experience.1,highest_experience.2,highest_experience.3,highest_experience.4);
+    }    
 }
