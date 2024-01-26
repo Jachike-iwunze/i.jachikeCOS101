@@ -1,0 +1,9 @@
+		THE COMPANY INFORMATION
+		------------------------
+
+Company: Cadbury Nigeria Plc
+Founded: 1965
+Shares: 15000000
+Liabilities: 5500000
+Leverage: 63.33%
+5% of percentage Leverages: 3.17
